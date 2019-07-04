@@ -166,7 +166,7 @@ h3{
   position: absolute;
   top: 0;
   left: 0;
-  background-image: url("img/header-bg1.jpg");
+  background-image: url("/img/header-bg1.jpg");
   background-size: cover;
   background-position: bottom;
   background-repeat: no-repeat;
