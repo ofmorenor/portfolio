@@ -1,6 +1,12 @@
 (function(){
   'use strict';
 
+  const debug = false;
+
+  if(debug){
+    document.querySelector('#header-background').style.backgroundImage = "url('/img/header-bg1.jpg')"
+  }
+
   // Portfolio overview
   let portfolioItemList = document.querySelectorAll('.portfolio-item');
 
