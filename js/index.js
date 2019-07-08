@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-  const debug = false;
+  const debug = true;
 
   if(debug){
     document.querySelector('#header-background').style.backgroundImage = "url('/img/header-bg1.jpg')"
@@ -28,15 +28,15 @@
     e.preventDefault();
   }
 
-  // pupulate timeline
+  // **************************************
+  // pupulating timeline
   const data = JSON.parse(window.oscarPortfolio.dataStr);
   const timeline = document.querySelector('#timeline');
 
   let timelineHtml = '';
   data.timelineEvents.forEach((event, index) => {
-    let itemClass = index % 2 == 0 ? ' timeline-item-right ' : ' timeline-item-left ';
+    let itemClass = ` timeline-item-${event.type} `;
     let item = timeLineItem(event.year, event.title, event.description);
-    
     item = insertStrAtPosition(item, itemClass, item.indexOf('timeline-item">'));
     timelineHtml += item;
   });
@@ -58,15 +58,92 @@
     `;
   }
 
+  const allTimelineItems = document.querySelectorAll('.timeline-item');
+  recalculateTimelineDisplayProps();
+
+  // ****************************************
+  // timeline options
+  let timelineCheckboxes = document.querySelectorAll('#timeline-options input');
+
+  timelineCheckboxes.forEach(checkbox =>{
+    checkbox.checked = true;
+    checkbox.addEventListener('change', (e)=>{
+      registerCheckboxEvent(checkbox.checked, checkbox.name);
+    });
+  });
+
+  function registerCheckboxEvent(checkboxChecked, EventType){
+    if(checkboxChecked){
+      showTimelineItemsByType(EventType);
+      recalculateTimelineDisplayProps();
+    }
+    else{
+      hideTimelineItemsByType(EventType);
+      recalculateTimelineDisplayProps();
+    }
+  }
+
+  function showTimelineItemsByType(type){
+    let timelineItems = document.querySelectorAll(`.timeline-item-${type}`);
+    timelineItems.forEach(item => {
+      if(item.classList.contains('hidden')) item.classList.remove('hidden');
+    });
+  }
+  function hideTimelineItemsByType(type){
+    let timelineItems = document.querySelectorAll(`.timeline-item-${type}`);
+    timelineItems.forEach(item => {
+      item.classList.add('hidden');
+    });
+  }
+
+  function recalculateTimelineDisplayProps(){
+    let DisplayYear = [];
+    let visibleItems = 0;
+    let currentTimelineItems = [];
+    
+    let lastItem;
+    allTimelineItems.forEach(item => {
+      let itemYear = item.querySelector('.timeline-item-year');
+      let year = Number(itemYear.innerHTML);
+      removeDisplayProps(item);
+      
+      if (item.classList.contains('hidden')){
+        return;
+      }
+      currentTimelineItems.push(item);
+
+      if(currentTimelineItems.length % 2 == 0){
+        item.classList.add('timeline-item-left');
+      }
+      else{
+        item.classList.add('timeline-item-right');
+      }
+
+      if (DisplayYear.includes(year)){
+        itemYear.classList.add('year-hidden');
+      }
+      else{
+        DisplayYear.push(year);
+      }
+      lastItem = item;
+    });
+    
+    if(lastItem) lastItem.classList.add('timeline-item-last');
+    reorderTimelineForSmallScreens();
+  }
+
+  function removeDisplayProps(timelineItem){
+    timelineItem.classList.remove('timeline-item-right');
+    timelineItem.classList.remove('timeline-item-left');
+    timelineItem.classList.remove('timeline-item-last');
+    timelineItem.querySelector('.timeline-item-year').classList.remove('year-hidden');
+  }
+
   // responsive
-  let screenWidth = window.innerWidth;
-  if(screenWidth < 576){
-    putTimelineItemsToLeft();
-  } 
+  reorderTimelineForSmallScreens();
 
   window.onresize =  function(e){
-    console.log('window resized', window.innerWidth);
-    screenWidth = window.innerWidth;
+    let screenWidth = window.innerWidth;
     if(screenWidth < 576){
       putTimelineItemsToLeft();
     } 
@@ -75,8 +152,14 @@
     }
   }
 
-  function putTimelineItemsToLeft(){
+  function reorderTimelineForSmallScreens(){
+    let screenWidth = window.innerWidth;
+    if(screenWidth < 576){
+     putTimelineItemsToLeft();
+    } 
+  }
 
+  function putTimelineItemsToLeft(){
     let timelineItems = document.querySelectorAll('.timeline-item-right');
     timelineItems.forEach(item => {
       item.classList.remove('timeline-item-right');
@@ -101,5 +184,6 @@
   function insertStrAtPosition(mainStr, strToAdd, pos){
     return mainStr.substring(0, pos) + strToAdd + mainStr.substring(pos);
   }
+
   
 })();

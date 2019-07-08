@@ -67,6 +67,10 @@ h3{
   font-size: 2.5rem;
 }
 
+.module {
+  scroll-behavior: smooth;
+}
+
 @media(max-width: 576px){
   h1{
     font-size: 2.7rem;
@@ -267,6 +271,13 @@ h3{
   }
 }
 
+/* timeline options */
+@media(max-width: 576px){
+  #timeline-options{
+    padding-bottom: 2rem;
+  }
+}
+
 /* Time line */
 #timeline{
   margin: auto;
@@ -296,9 +307,13 @@ h3{
 }
 .timeline-item-title{
   width: 100%;
+  font-size: 1.2rem;
 }
 .timeline-item-content{
   font-size: 0.8rem;
+}
+.year-hidden{
+  color: var(--color-brown);
 }
 
 /* left item */
@@ -358,14 +373,14 @@ h3{
 }
 
 /* last item */
-#timeline .timeline-item:last-child{
+.timeline-item-last{
   border: none;
   padding-bottom: 0;
 }
-#timeline-item-right .timeline-item:last-child .timeline-item-dot{
+#timeline-item-right .timeline-item-last .timeline-item-dot{
   transform: translateX(-40%);
 }
-#timeline-item-left .timeline-item:last-child .timeline-item-dot{
+#timeline-item-left .timeline-item-last .timeline-item-dot{
   transform: translateX(40%);
 }
 
@@ -383,6 +398,7 @@ h3{
 
 .portfolio-item{
   position: relative;
+  background: black;
 }
 
 .portfolio-item img{
@@ -401,6 +417,10 @@ h3{
   display: none;
 }
 
+.portfolio-item-hover a{
+  color: #fff;
+}
+
 .portfolio-item-hover p{
   text-align: center;
   margin-top: 10%;
@@ -417,6 +437,11 @@ h3{
   bottom: 0.5rem;
   right: 0.5rem;
   margin-right: 0 !important;
+}
+
+/* */
+#portfolio .row:last-child{
+  display: none;
 }
 
 @media(max-width: 576px){
@@ -445,4 +470,8 @@ h3{
 #main-footer{
   padding-top: 2rem;
   padding-bottom: 2rem;
+}
+
+.hidden{
+  display: none;
 }
