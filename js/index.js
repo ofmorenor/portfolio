@@ -1,7 +1,7 @@
 (function(){
   'use strict';
 
-  const debug = true;
+  const debug = false;
 
   if(debug){
     document.querySelector('#header-background').style.backgroundImage = "url('/img/header-bg1.jpg')"
