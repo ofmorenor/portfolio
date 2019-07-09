@@ -448,7 +448,7 @@ h3{
   #portfolio .row{
     grid-template-columns: 1fr;
     grid-row-gap: 1rem;
-    padding: 0 1rem;
+    padding: 0 10%;
   }
   #portfolio .row:last-child{
     display: none;
