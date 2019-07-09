@@ -22,7 +22,7 @@
      {
        year: 2018, 
        title: 'Desarrollo interfaz gráfica para experiencia Parque Explora', 
-       description:`Apoyo en el desarrollo de interfaz gráfica (C++) en experiencia sonora para la sala MUSICA del Parque Explora`,
+       description:`Apoyo en el desarrollo de interfaz gráfica (C++) en experiencia sonora interactiva para la sala MUSICA del Parque Explora`,
        type: 'colaboration'
      },
      {
