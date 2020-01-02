@@ -119,7 +119,7 @@
       <h2>Trabajos y Prácticas</h2>
       <div class="row">
         <div class="portfolio-item">
-          <img src="img/latitudzero.jpg" alt="">
+          <img src="img/latitudzero2.jpg" alt="">
           <div class="portfolio-item-hover">
             <p>Trabajo</p>
             <p>Latitud Zero</p>
@@ -185,7 +185,9 @@
   </section>
 
   <footer id="main-footer">
-    <p class="text-center">Oscar Moreno 2019</p>
+    <p class="text-center">Oscar Moreno 
+      <span id="copyright-year"></span>
+    </p>
   </footer>
 
   <script src="js/data.js"></script>
@@ -193,6 +195,9 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script>
     $(document).ready(function(){
+      // add copyright year
+      $("#copyright-year").html(new Date(Date.now()).getFullYear());
+
       // Add smooth scrolling to all links
       $("a").on('click', function(event) {
       
